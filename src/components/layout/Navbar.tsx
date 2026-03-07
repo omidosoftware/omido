@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -42,15 +43,17 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="group flex items-baseline gap-1.5 text-text-primary"
+            className="relative shrink-0"
             aria-label="Omido Software — Terug naar home"
           >
-            <span className="text-xl font-bold tracking-tight transition-colors group-hover:text-accent">
-              OMIDO
-            </span>
-            <span className="text-[11px] font-semibold tracking-[0.2em] text-text-muted transition-colors group-hover:text-text-tertiary">
-              SOFTWARE
-            </span>
+            <Image
+              src="/omido_logo.png"
+              alt="Omido Software"
+              width={130}
+              height={44}
+              className="h-8 w-auto md:h-9"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}

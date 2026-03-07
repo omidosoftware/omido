@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "./Container";
 import { COMPANY, NAV_ITEMS } from "@/lib/constants";
 
@@ -16,9 +17,14 @@ export function Footer() {
         <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4 lg:py-20">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-flex items-baseline gap-1.5">
-              <span className="text-xl font-bold tracking-tight text-text-primary">OMIDO</span>
-              <span className="text-[11px] font-semibold tracking-[0.2em] text-text-muted">SOFTWARE</span>
+            <Link href="/">
+              <Image
+                src="/omido_logo.png"
+                alt="Omido Software"
+                width={130}
+                height={44}
+                className="h-8 w-auto"
+              />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-text-tertiary">
               Jouw technisch partner voor maatwerksoftware, AI-integraties en schaalbare platformen.
