@@ -2,14 +2,13 @@
 
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
-import { Shield, Zap, Code2, Handshake } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 
 const pillars = [
-  { icon: Zap, label: "Snelle oplevering", detail: "Eerste versie vaak binnen weken" },
-  { icon: Shield, label: "Veilig gebouwd", detail: "Security-first architectuur" },
-  { icon: Code2, label: "Jouw eigendom", detail: "100% broncode overdracht" },
-  { icon: Handshake, label: "Vaste prijs", detail: "Transparante offerte vooraf" },
+  { num: "01", label: "Snelle oplevering", detail: "Eerste versie vaak binnen weken" },
+  { num: "02", label: "Veilig gebouwd", detail: "Security-first architectuur" },
+  { num: "03", label: "Jouw eigendom", detail: "100% broncode overdracht" },
+  { num: "04", label: "Vaste prijs", detail: "Transparante offerte vooraf" },
 ];
 
 export function TrustMetrics() {
@@ -18,39 +17,43 @@ export function TrustMetrics() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div className="relative border-y border-border-subtle bg-bg-elevated/80">
+    <section className="relative border-y border-border-subtle" aria-label="Onze beloften">
       <Container>
-        <div ref={ref} className="py-10 md:py-12">
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
-            {pillars.map((pillar, i) => {
-              const Icon = pillar.icon;
-              return (
-                <motion.div
+        <motion.div
+          ref={ref}
+          className="py-8 md:py-12"
+          initial={shouldReduceMotion ? undefined : { opacity: 0, x: 30 }}
+          animate={isInView ? { opacity: 1, x: 0 } : undefined}
+          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          {/* Mobile: horizontal scroll strip with fade edge. Desktop: 4-col grid */}
+          <div className="relative md:contents">
+            <div className="-mx-6 flex gap-8 overflow-x-auto px-6 pb-1 snap-x snap-proximity scrollbar-hide md:mx-0 md:grid md:grid-cols-4 md:gap-8 md:overflow-visible md:px-0 md:pb-0">
+              {pillars.map((pillar) => (
+                <div
                   key={pillar.label}
-                  className="flex flex-col items-center text-center"
-                  initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : undefined}
-                  transition={{
-                    duration: 0.5,
-                    delay: i * 0.1,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                  }}
+                  className="flex min-w-[152px] shrink-0 snap-start flex-col md:min-w-0 md:items-center md:text-center"
                 >
-                  <div className="mb-2.5 flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-accent-muted">
-                    <Icon className="h-[18px] w-[18px] text-accent" />
-                  </div>
-                  <span className="text-[14px] font-semibold text-text-primary">
+                  <span className="mb-1.5 font-mono text-[11px] tracking-wide text-text-tertiary">
+                    {pillar.num}
+                  </span>
+                  <span className="font-[family-name:var(--font-display)] text-[18px] leading-snug text-text-primary">
                     {pillar.label}
                   </span>
-                  <span className="mt-0.5 text-[12px] text-text-tertiary">
+                  <span className="mt-1 text-[13px] leading-relaxed text-text-secondary">
                     {pillar.detail}
                   </span>
-                </motion.div>
-              );
-            })}
+                </div>
+              ))}
+            </div>
+            {/* Right fade — scroll affordance on mobile */}
+            <div
+              className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-bg-primary to-transparent md:hidden"
+              aria-hidden="true"
+            />
           </div>
-        </div>
+        </motion.div>
       </Container>
-    </div>
+    </section>
   );
 }

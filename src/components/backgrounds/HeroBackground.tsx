@@ -99,6 +99,9 @@ export function HeroBackground() {
         <circle cx="750" cy="350" r="160" fill="none" stroke="#D4A853" strokeWidth="0.2" opacity="0.04" />
       </svg>
 
+      {/* Mobile: subtle radial gold glow (lightweight alternative to SVG network) */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_35%,rgba(212,168,83,0.03),transparent_70%)] md:hidden" />
+
       {/* Top fade */}
       <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-bg-primary to-transparent" />
       {/* Bottom fade */}

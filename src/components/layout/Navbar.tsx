@@ -5,17 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Users, Briefcase, Code2, Mail, X } from "lucide-react";
 import { NAV_ITEMS, COMPANY } from "@/lib/constants";
 import { isValidPhone } from "@/lib/utils";
-
-const NAV_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
-  "/": Home,
-  "/over-ons": Users,
-  "/portfolio": Briefcase,
-  "/diensten": Code2,
-  "/contact": Mail,
-};
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -175,108 +166,97 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Full-Screen Overlay */}
+      {/* Mobile Full-Screen Overlay — Typography-led, left-aligned */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
             className="fixed inset-0 z-50 flex flex-col bg-[#0A0A0B] lg:hidden"
             style={{ paddingBottom: "max(2rem, env(safe-area-inset-bottom, 2rem))" }}
             role="dialog"
             aria-modal="true"
             aria-label="Mobiel navigatiemenu"
           >
-            {/* Close button — top right */}
-            <div className="flex justify-end px-6 pt-5">
+            {/* Close control — top right, text-based */}
+            <div className="flex justify-end px-8 pt-5">
               <motion.button
-                initial={{ opacity: 0, rotate: -90 }}
-                animate={{ opacity: 1, rotate: 0 }}
-                transition={{ delay: 0.15, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.1, duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
                 onClick={() => setMobileOpen(false)}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-text-secondary transition-colors hover:bg-white/5 hover:text-text-primary"
+                className="min-h-[44px] min-w-[44px] flex items-center justify-center text-[13px] font-medium tracking-[0.04em] text-text-tertiary transition-colors active:text-text-primary"
                 aria-label="Sluit menu"
               >
-                <X className="h-5 w-5" />
+                Sluiten
               </motion.button>
             </div>
 
-            {/* Nav items — centered */}
-            <div className="flex flex-1 flex-col items-center justify-center -mt-6">
-              <div className="flex flex-col items-center space-y-5">
+            {/* Nav items — left-aligned, graduated type scale */}
+            <div className="flex flex-1 flex-col justify-start px-8 pt-[20vh]">
+              <div className="flex flex-col space-y-7">
                 {NAV_ITEMS.map((item, i) => {
-                  const Icon = NAV_ICONS[item.href];
                   const isActive = pathname === item.href;
                   return (
                     <motion.div
                       key={item.href}
-                      initial={{ opacity: 0, y: 16 }}
+                      initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
-                        delay: 0.12 + i * 0.06,
-                        duration: 0.4,
+                        delay: 0.08 + i * 0.05,
+                        duration: 0.35,
                         ease: [0.25, 0.46, 0.45, 0.94],
                       }}
                     >
                       <Link
                         href={item.href}
-                        className={`group flex items-center gap-3 transition-colors duration-200 ${
+                        className={`block font-[family-name:var(--font-instrument-serif)] tracking-tight transition-colors duration-200 ${
                           isActive
-                            ? "text-text-primary"
-                            : "text-text-tertiary"
+                            ? "text-[2.25rem] leading-[1.1] text-text-primary"
+                            : "text-[1.875rem] leading-[1.1] text-text-tertiary active:text-text-secondary"
                         }`}
                       >
-                        {Icon && (
-                          <span className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors duration-200 ${
-                            isActive
-                              ? "bg-accent/12 text-accent"
-                              : "bg-white/[0.04] text-text-muted group-hover:bg-white/[0.07] group-hover:text-text-secondary"
-                          }`}>
-                            <Icon className="h-[18px] w-[18px]" />
-                          </span>
-                        )}
-                        <span className={`font-[family-name:var(--font-instrument-serif)] text-[1.75rem] font-normal leading-none tracking-tight ${
-                          isActive ? "" : "group-hover:text-text-secondary"
-                        }`}>
-                          {item.label}
-                        </span>
-                        {isActive && (
-                          <motion.span
-                            layoutId="mobile-nav-dot"
-                            className="ml-1 h-1.5 w-1.5 rounded-full bg-accent"
-                            transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-                          />
-                        )}
+                        {item.label}
                       </Link>
+                      {isActive && (
+                        <motion.div
+                          layoutId="mobile-nav-line"
+                          className="mt-2 h-[1.5px] w-8 bg-accent"
+                          transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
+                        />
+                      )}
                     </motion.div>
                   );
                 })}
               </div>
             </div>
 
-            {/* Bottom — phone */}
-            {showPhone && (
-              <div className="px-6 pb-2">
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: 0.4,
-                    duration: 0.35,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                  }}
-                >
+            {/* Bottom — contact info */}
+            <div className="px-8 pb-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="border-t border-border-subtle pt-5"
+              >
+                {showPhone && (
                   <a
                     href={`tel:${COMPANY.phone.replace(/\s/g, "")}`}
-                    className="block text-center text-sm tracking-wide text-text-muted/60"
+                    className="block text-[13px] tracking-wide text-text-muted"
                   >
                     {COMPANY.phone}
                   </a>
-                </motion.div>
-              </div>
-            )}
+                )}
+                <a
+                  href={`mailto:${COMPANY.email}`}
+                  className={`block text-[13px] tracking-wide text-text-muted ${showPhone ? "mt-1" : ""}`}
+                >
+                  {COMPANY.email}
+                </a>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
