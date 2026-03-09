@@ -22,7 +22,7 @@ export function TrustMetrics() {
         <motion.div
           ref={ref}
           className="py-8 md:py-12"
-          initial={shouldReduceMotion ? undefined : { opacity: 0, x: 30 }}
+          initial={shouldReduceMotion ? undefined : { opacity: 0, x: -30 }}
           animate={isInView ? { opacity: 1, x: 0 } : undefined}
           transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
         >

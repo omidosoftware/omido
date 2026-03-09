@@ -194,14 +194,15 @@ export function Navbar() {
               </motion.button>
             </div>
 
-            {/* Nav items — left-aligned, graduated type scale */}
-            <div className="flex flex-1 flex-col justify-start px-8 pt-[20vh]">
-              <div className="flex flex-col space-y-7">
+            {/* Nav items — centered, graduated type scale */}
+            <div className="flex flex-1 flex-col items-center justify-center -mt-8">
+              <div className="flex flex-col items-center space-y-7">
                 {NAV_ITEMS.map((item, i) => {
                   const isActive = pathname === item.href;
                   return (
                     <motion.div
                       key={item.href}
+                      className="text-center"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
@@ -223,7 +224,7 @@ export function Navbar() {
                       {isActive && (
                         <motion.div
                           layoutId="mobile-nav-line"
-                          className="mt-2 h-[1.5px] w-8 bg-accent"
+                          className="mx-auto mt-2 h-[1.5px] w-8 bg-accent"
                           transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
                         />
                       )}
@@ -239,7 +240,7 @@ export function Navbar() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="border-t border-border-subtle pt-5"
+                className="border-t border-border-subtle pt-5 text-center"
               >
                 {showPhone && (
                   <a

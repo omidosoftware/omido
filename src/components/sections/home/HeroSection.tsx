@@ -98,9 +98,11 @@ export function HeroSection() {
               Bekijk ons werk
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
-            <Button href="/portfolio" variant="secondary" size="lg" arrow className="hidden md:inline-flex">
-              Bekijk ons werk
-            </Button>
+            <div className="hidden md:block">
+              <Button href="/portfolio" variant="secondary" size="lg" arrow>
+                Bekijk ons werk
+              </Button>
+            </div>
           </motion.div>
         </div>
       </Container>
@@ -153,9 +155,11 @@ function HeroContent() {
           Bekijk ons werk
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
-        <Button href="/portfolio" variant="secondary" size="lg" arrow className="hidden md:inline-flex">
-          Bekijk ons werk
-        </Button>
+        <div className="hidden md:block">
+          <Button href="/portfolio" variant="secondary" size="lg" arrow>
+            Bekijk ons werk
+          </Button>
+        </div>
       </div>
     </div>
   );
