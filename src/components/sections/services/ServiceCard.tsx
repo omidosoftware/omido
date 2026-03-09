@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BrainCircuit, Monitor, Server, Cable, Check } from "lucide-react";
+import { BrainCircuit, Monitor, Server, Cable, Check, Users } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { Service } from "@/content/services";
 
@@ -54,9 +54,29 @@ export function ServiceCard({ service }: { service: Service }) {
           {service.title}
         </h3>
 
+        {/* Problem framing */}
+        <p className="mb-3 text-sm font-medium text-accent/80 italic">
+          &ldquo;{service.problem}&rdquo;
+        </p>
+
         <p className="mb-6 flex-1 text-sm leading-relaxed text-text-secondary">
           {service.description}
         </p>
+
+        {/* Ideal for */}
+        <div className="mb-6 rounded-[var(--radius-md)] border border-border-subtle bg-bg-primary px-5 py-4">
+          <p className="mb-2.5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-text-muted">
+            <Users className="h-3.5 w-3.5" />
+            Past bij
+          </p>
+          <ul className="space-y-1.5">
+            {service.idealFor.map((item) => (
+              <li key={item} className="text-[13px] text-text-secondary">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <ul className="mb-8 space-y-2.5">
           {service.features.map((feature) => (

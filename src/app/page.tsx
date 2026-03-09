@@ -1,10 +1,13 @@
 import { HeroSection } from "@/components/sections/home/HeroSection";
-import { TrustStrip } from "@/components/sections/home/TrustStrip";
-import { ProcessSection } from "@/components/sections/home/ProcessSection";
+import { TrustMetrics } from "@/components/sections/home/TrustMetrics";
+import { WhyOmido } from "@/components/sections/home/WhyOmido";
 import { ServicesPreview } from "@/components/sections/home/ServicesPreview";
+import { ProcessSection } from "@/components/sections/home/ProcessSection";
+import { ResultsSection } from "@/components/sections/home/ResultsSection";
+import { EntryOfferSection } from "@/components/sections/home/EntryOfferSection";
 import { FAQSection } from "@/components/sections/home/FAQSection";
-import { faqs } from "@/content/faqs";
 import { CTASection } from "@/components/sections/home/CTASection";
+import { faqs } from "@/content/faqs";
 import { faqSchema } from "@/lib/schema";
 
 export default function HomePage() {
@@ -17,9 +20,12 @@ export default function HomePage() {
         }}
       />
       <HeroSection />
-      <TrustStrip />
-      <ProcessSection />
+      <TrustMetrics />
+      <WhyOmido />
       <ServicesPreview />
+      <ProcessSection />
+      <ResultsSection />
+      <EntryOfferSection />
       <FAQSection />
       <CTASection />
     </>

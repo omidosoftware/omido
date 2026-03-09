@@ -2,7 +2,9 @@ export interface Service {
   id: string;
   icon: string;
   title: string;
+  problem: string;
   description: string;
+  idealFor: string[];
   features: string[];
   cta: { label: string; href: string };
   highlighted?: boolean;
@@ -13,12 +15,18 @@ export const services: Service[] = [
     id: "ai-automation",
     icon: "BrainCircuit",
     title: "AI Agents & Automatisering",
+    problem:
+      "Je team besteedt uren aan taken die slim geautomatiseerd kunnen worden.",
     description:
-      "Stop met repetitief handwerk. Wij bouwen en integreren slimme AI-agents direct in jouw bedrijfsprocessen. Van automatische documentverwerking tot intelligente assistenten voor je klantenservice.",
+      "Wij bouwen en integreren AI-agents direct in jouw bedrijfsprocessen. Documenten die zichzelf verwerken, klantvragen die automatisch beantwoord worden, data die zichzelf organiseert. Minder handwerk, meer focus op wat ertoe doet.",
+    idealFor: [
+      "Bedrijven met repetitieve handmatige processen",
+      "Teams die sneller willen werken zonder extra personeel",
+    ],
     features: [
-      "Automatisering van interne processen",
-      "Custom AI-assistenten op eigen data",
-      "LLM API-integraties",
+      "Procesautomatisering op maat",
+      "AI-assistenten getraind op jouw data",
+      "Integratie met bestaande bedrijfssoftware",
     ],
     cta: { label: "Bespreek automatisering", href: "/contact" },
     highlighted: true,
@@ -27,12 +35,18 @@ export const services: Service[] = [
     id: "web-apps",
     icon: "Monitor",
     title: "Maatwerk Web Applicaties",
+    problem:
+      "Standaardsoftware past niet bij jouw werkproces of schaalt niet mee.",
     description:
-      "Van interactieve dashboards en portalen tot volledige B2B-software. Wij ontwerpen en bouwen 100% custom web applicaties die precies doen wat jouw bedrijf nodig heeft.",
+      "Van interne dashboards en klantportalen tot volledige B2B-software. Wij ontwerpen en bouwen applicaties die precies doen wat jouw bedrijf nodig heeft — niet meer, niet minder.",
+    idealFor: [
+      "Bedrijven die standaardsoftware ontgroeien",
+      "Organisaties met complexe interne processen",
+    ],
     features: [
-      "Interne bedrijfssoftware & dashboards",
-      "Veilige klantportalen",
-      "Complexe datavisualisatie",
+      "Interne bedrijfssoftware en dashboards",
+      "Beveiligde klant- en partnerportalen",
+      "Real-time data-inzichten en rapportages",
     ],
     cta: { label: "Plan een technisch gesprek", href: "/contact" },
   },
@@ -40,12 +54,18 @@ export const services: Service[] = [
     id: "saas-platforms",
     icon: "Server",
     title: "Complete SaaS Platformen",
+    problem:
+      "Je hebt een idee voor een softwareproduct maar mist het technisch team om het te bouwen.",
     description:
-      "Jouw eigen idee op de markt brengen? Wij bouwen schaalbare Software-as-a-Service architecturen inclusief abonnementen, gebruikersbeheer en veilige betalingsintegraties.",
+      "Wij bouwen schaalbare Software-as-a-Service platformen van concept tot markt. Inclusief gebruikersbeheer, abonnementen, betalingsintegratie en de architectuur om door te groeien.",
+    idealFor: [
+      "Ondernemers met een SaaS-idee",
+      "Bedrijven die een bestaand proces als product willen aanbieden",
+    ],
     features: [
-      "Tweezijdige marktplaatsen",
-      "Stripe / Mollie betaalintegraties",
-      "Premium SEO-optimalisatie",
+      "Schaalbare multi-tenant architectuur",
+      "Betaalintegratie via Stripe of Mollie",
+      "Gebruikersbeheer en onboarding-flows",
     ],
     cta: { label: "Start jouw SaaS-traject", href: "/contact" },
   },
@@ -53,12 +73,18 @@ export const services: Service[] = [
     id: "api-integrations",
     icon: "Cable",
     title: "API's & Systeemintegraties",
+    problem:
+      "Je systemen praten niet met elkaar en je team vult handmatig data over.",
     description:
-      "Werkt jouw bedrijf met systemen die niet met elkaar praten? Wij bouwen veilige, onzichtbare bruggen die data volautomatisch synchroniseren tussen al je softwarepakketten.",
+      "Wij bouwen veilige koppelingen die data automatisch synchroniseren tussen je CRM, boekhouding, webshop of eigen software. Geen handmatig overtypen, geen fouten, geen vertraging.",
+    idealFor: [
+      "Bedrijven met meerdere losse softwaresystemen",
+      "Teams die tijd verliezen aan handmatige datasynchronisatie",
+    ],
     features: [
       "Custom API-ontwikkeling",
-      "Koppelingen met bestaande software",
-      "Real-time datasynchronisatie",
+      "Koppelingen met bestaande bedrijfssoftware",
+      "Real-time of geplande datasynchronisatie",
     ],
     cta: { label: "Koppel jouw systemen", href: "/contact" },
   },

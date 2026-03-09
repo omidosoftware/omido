@@ -35,13 +35,18 @@ export default function PortfolioPage() {
       />
       <SectionWrapper>
         <Container>
-          {caseStudies.map((study) => (
-            <CaseStudy key={study.slug} study={study} />
-          ))}
+          <div className="space-y-20">
+            {caseStudies.map((study) => (
+              <CaseStudy key={study.slug} study={study} />
+            ))}
+          </div>
           <NextProject />
         </Container>
       </SectionWrapper>
-      <PreFooterCTA />
+      <PreFooterCTA
+        headline="Jouw project als volgende case study?"
+        subtitle="Vertel ons over jouw idee — we laten je graag zien wat we kunnen bouwen."
+      />
     </>
   );
 }

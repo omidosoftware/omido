@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, Check, Zap, Shield } from "lucide-react";
+import { ExternalLink, Check, Zap, Shield, Compass } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/motion/FadeIn";
@@ -8,105 +8,118 @@ import type { CaseStudy as CaseStudyType } from "@/content/portfolio";
 
 export function CaseStudy({ study }: { study: CaseStudyType }) {
   return (
-    <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 lg:items-center">
-      {/* Visual mockup */}
-      <FadeIn direction="left" distance={30}>
-        <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-xl)] border border-border-default bg-bg-elevated md:aspect-video">
-          {/* Decorative grid lines */}
-          <div className="absolute inset-0 opacity-30">
-            <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="case-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1A1A1E" strokeWidth="0.5" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#case-grid)" />
-            </svg>
-          </div>
+    <div className="space-y-10 lg:space-y-14">
+      {/* Top: Project identity card */}
+      <FadeIn>
+        <div className="overflow-hidden rounded-[var(--radius-lg)] border border-border-default bg-bg-subtle">
+          <div className="grid lg:grid-cols-2">
+            {/* Left: project identity */}
+            <div className="flex flex-col justify-center border-b border-border-subtle p-8 lg:border-b-0 lg:border-r lg:p-12">
+              <div className="mb-4 flex flex-wrap gap-2">
+                {study.tags.map((tag) => (
+                  <Badge key={tag}>{tag}</Badge>
+                ))}
+              </div>
+              <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold tracking-tight text-text-primary">
+                {study.title}
+              </h2>
+              <p className="mt-1 text-text-tertiary">{study.subtitle}</p>
 
-          <div className="relative flex h-full flex-col items-center justify-center p-8 text-center">
-            <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl border border-border-default bg-bg-subtle shadow-glow-sm">
-              <ExternalLink className="h-6 w-6 text-accent" />
-            </div>
-            <h3 className="text-3xl font-bold tracking-tight text-text-primary md:text-4xl">
-              {study.title}
-              <span className="text-accent">.nl</span>
-            </h3>
-            <p className="mt-2 text-sm text-text-tertiary">{study.subtitle}</p>
-            <div className="mt-6 flex flex-wrap justify-center gap-2">
-              {study.techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-full border border-border-subtle bg-bg-muted px-3 py-1 text-[11px] font-medium text-text-tertiary"
-                >
-                  {tech}
+              {/* Project meta */}
+              <div className="mt-6 grid grid-cols-3 gap-4 rounded-[var(--radius-md)] border border-border-subtle bg-bg-primary px-5 py-4">
+                {study.projectMeta.map((meta) => (
+                  <div key={meta.label}>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-text-muted">
+                      {meta.label}
+                    </p>
+                    <p className="mt-0.5 text-[13px] font-medium text-text-secondary">
+                      {meta.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 flex flex-wrap items-center gap-4">
+                <Button href={study.url} external size="sm" arrow>
+                  Bekijk live
+                </Button>
+                <span className="flex items-center gap-1.5 text-sm text-text-tertiary">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-success/15">
+                    <Check className="h-3 w-3 text-success" strokeWidth={3} />
+                  </span>
+                  Live opgeleverd
                 </span>
-              ))}
+              </div>
+            </div>
+
+            {/* Right: deliverables */}
+            <div className="flex flex-col justify-center p-8 lg:p-12">
+              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
+                Opgeleverd
+              </p>
+              <ul className="space-y-3">
+                {study.deliverables.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" strokeWidth={2.5} />
+                    <span className="text-[15px] text-text-secondary">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
       </FadeIn>
 
-      {/* Content */}
-      <FadeIn delay={0.12}>
-        <div>
-          <div className="mb-4 flex flex-wrap gap-2">
-            {study.tags.map((tag) => (
-              <Badge key={tag}>{tag}</Badge>
-            ))}
-          </div>
-
-          <h2 className="mb-6 text-2xl font-semibold tracking-tight text-text-primary">
-            {study.subtitle}
-          </h2>
-
-          {/* Challenge */}
-          <div className="mb-6">
-            <h4 className="mb-2.5 flex items-center gap-2 text-sm font-semibold text-text-primary">
-              <div className="flex h-6 w-6 items-center justify-center rounded-md bg-accent-muted">
+      {/* Bottom: challenge → approach → solution */}
+      <div className="grid gap-6 md:grid-cols-3 md:gap-8">
+        <FadeIn delay={0.05}>
+          <div className="rounded-[var(--radius-md)] border border-border-default bg-bg-subtle p-6 md:p-7">
+            <div className="mb-3 flex items-center gap-2.5">
+              <div className="flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)] bg-accent-muted">
                 <Zap className="h-3.5 w-3.5 text-accent" />
               </div>
-              De uitdaging
-            </h4>
+              <h4 className="text-sm font-semibold text-text-primary">
+                De uitdaging
+              </h4>
+            </div>
             <p className="text-sm leading-relaxed text-text-secondary">
               {study.challenge}
             </p>
           </div>
+        </FadeIn>
 
-          {/* Solution */}
-          <div className="mb-6">
-            <h4 className="mb-2.5 flex items-center gap-2 text-sm font-semibold text-text-primary">
-              <div className="flex h-6 w-6 items-center justify-center rounded-md bg-accent-muted">
+        <FadeIn delay={0.1}>
+          <div className="rounded-[var(--radius-md)] border border-border-default bg-bg-subtle p-6 md:p-7">
+            <div className="mb-3 flex items-center gap-2.5">
+              <div className="flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)] bg-accent-muted">
+                <Compass className="h-3.5 w-3.5 text-accent" />
+              </div>
+              <h4 className="text-sm font-semibold text-text-primary">
+                Onze aanpak
+              </h4>
+            </div>
+            <p className="text-sm leading-relaxed text-text-secondary">
+              {study.approach}
+            </p>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.15}>
+          <div className="rounded-[var(--radius-md)] border border-border-default bg-bg-subtle p-6 md:p-7">
+            <div className="mb-3 flex items-center gap-2.5">
+              <div className="flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)] bg-accent-muted">
                 <Shield className="h-3.5 w-3.5 text-accent" />
               </div>
-              Onze oplossing
-            </h4>
-            <p className="mb-3 text-sm leading-relaxed text-text-secondary">
+              <h4 className="text-sm font-semibold text-text-primary">
+                Het resultaat
+              </h4>
+            </div>
+            <p className="text-sm leading-relaxed text-text-secondary">
               {study.solution}
             </p>
-            <ul className="space-y-2">
-              {study.deliverables.map((item) => (
-                <li key={item} className="flex items-start gap-2.5">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" strokeWidth={2.5} />
-                  <span className="text-sm text-text-secondary">{item}</span>
-                </li>
-              ))}
-            </ul>
           </div>
-
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Button href={study.url} external arrow>
-              Bekijk live website
-            </Button>
-            <span className="flex items-center gap-1.5 text-sm text-text-tertiary">
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-success/15">
-                <Check className="h-3 w-3 text-success" strokeWidth={3} />
-              </span>
-              Live opgeleverd
-            </span>
-          </div>
-        </div>
-      </FadeIn>
+        </FadeIn>
+      </div>
     </div>
   );
 }

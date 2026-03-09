@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Check } from "lucide-react";
+import { Send, Check, AlertCircle, ChevronDown } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { FadeIn } from "@/components/motion/FadeIn";
 
@@ -17,19 +17,58 @@ const serviceOptions = [
 const inputClasses =
   "w-full rounded-[var(--radius-sm)] border border-border-default bg-bg-muted px-4 py-3 text-[15px] text-text-primary placeholder:text-text-muted transition-all duration-200 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/50 hover:border-border-hover";
 
-export function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
+type FormStatus = "idle" | "submitting" | "success" | "error";
 
-  function handleSubmit(e: FormEvent) {
+export function ContactForm() {
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setStatus("submitting");
+    setErrorMessage("");
+
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
+      email: (form.elements.namedItem("email") as HTMLInputElement).value.trim(),
+      service: (form.elements.namedItem("service") as HTMLSelectElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim(),
+    };
+
+    // Client-side validation
+    if (!data.name || !data.email || !data.message) {
+      setStatus("error");
+      setErrorMessage("Vul alle verplichte velden in.");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || "Er ging iets mis. Probeer het opnieuw.");
+      }
+
+      setStatus("success");
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(
+        err instanceof Error ? err.message : "Er ging iets mis. Probeer het opnieuw."
+      );
+    }
   }
 
   return (
     <FadeIn delay={0.1}>
       <Card padding="spacious">
         <AnimatePresence mode="wait">
-          {submitted ? (
+          {status === "success" ? (
             <motion.div
               key="success"
               initial={{ opacity: 0, scale: 0.95 }}
@@ -53,6 +92,14 @@ export function ContactForm() {
                 Vertel ons over jouw project
               </h2>
 
+              {/* Error banner */}
+              {status === "error" && errorMessage && (
+                <div className="mb-5 flex items-start gap-3 rounded-[var(--radius-sm)] border border-red-500/20 bg-red-500/5 px-4 py-3">
+                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
+                  <p className="text-sm text-red-400">{errorMessage}</p>
+                </div>
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid gap-5 md:grid-cols-2">
                   <div>
@@ -60,7 +107,7 @@ export function ContactForm() {
                       htmlFor="name"
                       className="mb-2 block text-[12px] font-semibold uppercase tracking-wider text-text-muted"
                     >
-                      Naam
+                      Naam *
                     </label>
                     <input
                       id="name"
@@ -76,7 +123,7 @@ export function ContactForm() {
                       htmlFor="email"
                       className="mb-2 block text-[12px] font-semibold uppercase tracking-wider text-text-muted"
                     >
-                      E-mail
+                      E-mail *
                     </label>
                     <input
                       id="email"
@@ -96,21 +143,24 @@ export function ContactForm() {
                   >
                     Type project
                   </label>
-                  <select
-                    id="service"
-                    name="service"
-                    className={`${inputClasses} appearance-none`}
-                    defaultValue=""
-                  >
-                    <option value="" disabled>
-                      Kies een expertise...
-                    </option>
-                    {serviceOptions.map((opt) => (
-                      <option key={opt} value={opt}>
-                        {opt}
+                  <div className="relative">
+                    <select
+                      id="service"
+                      name="service"
+                      className={`${inputClasses} appearance-none pr-10`}
+                      defaultValue=""
+                    >
+                      <option value="" disabled>
+                        Kies een expertise...
                       </option>
-                    ))}
-                  </select>
+                      {serviceOptions.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
+                  </div>
                 </div>
 
                 <div>
@@ -118,7 +168,7 @@ export function ContactForm() {
                     htmlFor="message"
                     className="mb-2 block text-[12px] font-semibold uppercase tracking-wider text-text-muted"
                   >
-                    Bericht
+                    Bericht *
                   </label>
                   <textarea
                     id="message"
@@ -132,10 +182,13 @@ export function ContactForm() {
 
                 <button
                   type="submit"
-                  className="group inline-flex w-full items-center justify-center rounded-[var(--radius-sm)] bg-accent px-8 py-3.5 text-[15px] font-semibold text-bg-primary transition-all duration-200 hover:bg-accent-hover hover:shadow-glow-sm md:w-auto"
+                  disabled={status === "submitting"}
+                  className="group inline-flex w-full items-center justify-center rounded-[var(--radius-sm)] bg-accent px-8 py-3.5 text-[15px] font-semibold text-bg-primary transition-all duration-200 hover:bg-accent-hover hover:shadow-glow-sm disabled:cursor-not-allowed disabled:opacity-60 md:w-auto"
                 >
-                  Verstuur bericht
-                  <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  {status === "submitting" ? "Verzenden..." : "Verstuur bericht"}
+                  {status !== "submitting" && (
+                    <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  )}
                 </button>
               </form>
             </motion.div>

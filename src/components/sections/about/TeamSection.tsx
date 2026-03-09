@@ -9,14 +9,14 @@ import { team } from "@/content/team";
 
 export function TeamSection() {
   return (
-    <SectionWrapper elevated>
+    <SectionWrapper>
       <Container>
         <FadeIn>
           <div className="mb-12 text-center">
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
               Team
             </p>
-            <h2 className="text-2xl font-semibold tracking-tight text-text-primary">
+            <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal leading-tight tracking-tight text-text-primary">
               Het team achter de code
             </h2>
           </div>

@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Container } from "@/components/layout/Container";
 import { ServiceGrid } from "@/components/sections/services/ServiceGrid";
 import { SLASection } from "@/components/sections/services/SLASection";
+import { PreFooterCTA } from "@/components/layout/PreFooterCTA";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 
@@ -39,7 +40,7 @@ export default function DienstenPage() {
       <PageHeader
         title="Onze"
         highlight="Diensten."
-        subtitle="Hoogwaardige softwareoplossingen, aangedreven door AI en vergaande automatisering."
+        subtitle="Software en AI-oplossingen die passen bij jouw bedrijf — niet andersom."
       />
 
       {/* Trust indicators */}
@@ -48,12 +49,12 @@ export default function DienstenPage() {
           <div className="-mt-6 mb-14 flex flex-wrap items-center justify-center gap-4 rounded-[var(--radius-md)] border border-border-subtle bg-bg-elevated px-6 py-3.5 md:gap-6">
             <span className="flex items-center gap-2 text-sm font-medium text-text-secondary">
               <Zap className="h-4 w-4 text-accent" />
-              AI-gedreven development
+              Eerste versie vaak live binnen weken
             </span>
             <span className="hidden text-text-muted md:block">&middot;</span>
-            <span className="flex items-center gap-2 text-sm font-medium text-accent">
-              <Shield className="h-4 w-4" />
-              Trajecten starten vanaf &euro;&nbsp;1.000,-
+            <span className="flex items-center gap-2 text-sm font-medium text-text-secondary">
+              <Shield className="h-4 w-4 text-accent" />
+              Instaptrajecten vanaf &euro;995
             </span>
           </div>
         </FadeIn>
@@ -66,6 +67,11 @@ export default function DienstenPage() {
       <div className="mt-16">
         <SLASection />
       </div>
+
+      <PreFooterCTA
+        headline="Weten welke dienst bij jou past?"
+        subtitle="Vertel ons over je situatie — we denken graag mee over de beste aanpak."
+      />
     </>
   );
 }

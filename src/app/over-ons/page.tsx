@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { StorySection } from "@/components/sections/about/StorySection";
+import { ValuesSection } from "@/components/sections/about/ValuesSection";
 import { TeamSection } from "@/components/sections/about/TeamSection";
 import { PreFooterCTA } from "@/components/layout/PreFooterCTA";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -30,8 +31,12 @@ export default function OverOnsPage() {
         subtitle="Een modern tech-bureau dat snapt dat software een middel is — geen doel op zich."
       />
       <StorySection />
+      <ValuesSection />
       <TeamSection />
-      <PreFooterCTA />
+      <PreFooterCTA
+        headline="Zin om samen te bouwen?"
+        subtitle="Vertel ons over jouw project — we denken graag mee."
+      />
     </>
   );
 }

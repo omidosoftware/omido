@@ -54,7 +54,7 @@ export function HeroSection() {
 
           {/* Badge */}
           <motion.div className="mb-8" variants={fadeUp}>
-            <Badge accent>End-to-end software partner</Badge>
+            <Badge accent>Software & AI partner voor groeiende bedrijven</Badge>
           </motion.div>
 
           {/* Headline */}
@@ -62,9 +62,9 @@ export function HeroSection() {
             className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,6.5vw,5.5rem)] font-normal leading-[0.92] tracking-tight"
             variants={fadeUp}
           >
-            Software die werkt.
+            Wij bouwen de software
             <br />
-            <span className="text-accent">Strategie die klopt.</span>
+            <span className="text-accent">waar jouw groei op draait.</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -72,8 +72,9 @@ export function HeroSection() {
             className="mx-auto mt-7 max-w-2xl text-[clamp(1rem,2vw,1.2rem)] leading-relaxed text-text-secondary md:mt-8"
             variants={fadeUp}
           >
-            Omido is jouw technisch partner voor maatwerksoftware, AI-integraties
-            en schaalbare platformen. Van strategie tot productie&nbsp;&mdash; in één hand.
+            Van AI-integraties en maatwerksoftware tot complete
+            SaaS-platformen. Eén team, van strategie tot
+            productie&nbsp;&mdash; gebouwd om te schalen.
           </motion.p>
 
           {/* CTAs */}
@@ -82,7 +83,7 @@ export function HeroSection() {
             variants={fadeUp}
           >
             <Button href="/contact" size="lg">
-              Start een gesprek
+              Plan een kennismaking
             </Button>
             <Button href="/portfolio" variant="secondary" size="lg" arrow>
               Bekijk ons werk
@@ -99,20 +100,21 @@ function HeroContent() {
     <div className="mx-auto max-w-[52rem] text-center">
       <div className="mx-auto mb-8 h-px w-16 bg-accent" />
       <div className="mb-8">
-        <Badge accent>End-to-end software partner</Badge>
+        <Badge accent>Software & AI partner voor groeiende bedrijven</Badge>
       </div>
       <h1 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,6.5vw,5.5rem)] font-normal leading-[0.92] tracking-tight">
-        Software die werkt.
+        Wij bouwen de software
         <br />
-        <span className="text-accent">Strategie die klopt.</span>
+        <span className="text-accent">waar jouw groei op draait.</span>
       </h1>
       <p className="mx-auto mt-7 max-w-2xl text-[clamp(1rem,2vw,1.2rem)] leading-relaxed text-text-secondary md:mt-8">
-        Omido is jouw technisch partner voor maatwerksoftware, AI-integraties
-        en schaalbare platformen. Van strategie tot productie&nbsp;&mdash; in één hand.
+        Van AI-integraties en maatwerksoftware tot complete
+        SaaS-platformen. Eén team, van strategie tot
+        productie&nbsp;&mdash; gebouwd om te schalen.
       </p>
       <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row md:mt-10">
         <Button href="/contact" size="lg">
-          Start een gesprek
+          Plan een kennismaking
         </Button>
         <Button href="/portfolio" variant="secondary" size="lg" arrow>
           Bekijk ons werk

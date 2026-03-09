@@ -19,11 +19,11 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Link href="/">
               <Image
-                src="/omido_logo.png"
+                src="/logo.png"
                 alt="Omido Software"
-                width={130}
-                height={44}
-                className="h-8 w-auto"
+                width={110}
+                height={36}
+                className="h-8 w-auto lg:h-9"
               />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-text-tertiary">

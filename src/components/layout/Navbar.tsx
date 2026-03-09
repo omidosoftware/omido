@@ -39,22 +39,36 @@ export function Navbar() {
       aria-label="Hoofdnavigatie"
     >
       <div className="mx-auto max-w-[1200px] px-6 md:px-8">
-        <div className="flex h-16 items-center justify-between lg:h-[4.5rem]">
+        {/* Mobile: 3-col grid with centered logo. Desktop: flex row. */}
+        <div className="grid h-16 grid-cols-[3rem_1fr_3rem] items-center lg:flex lg:h-[4.5rem] lg:justify-between">
+          {/* Mobile spacer (left) — hidden on desktop */}
+          <div className="lg:hidden" />
+
           {/* Logo */}
           <Link
             href="/"
-            className="relative shrink-0"
+            className="justify-self-center lg:justify-self-auto relative shrink-0"
             aria-label="Omido Software — Terug naar home"
           >
             <Image
-              src="/omido_logo.png"
+              src="/logo.png"
               alt="Omido Software"
-              width={130}
-              height={44}
-              className="h-8 w-auto md:h-9"
+              width={110}
+              height={36}
+              className="h-8 w-auto lg:h-9"
               priority
             />
           </Link>
+
+          {/* Mobile Toggle */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="justify-self-end flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] text-text-secondary transition-colors hover:bg-bg-subtle hover:text-text-primary lg:hidden"
+            aria-label={mobileOpen ? "Sluit menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
 
           {/* Desktop Nav */}
           <div className="hidden items-center gap-1 lg:flex">
@@ -82,19 +96,9 @@ export function Navbar() {
               href="/contact"
               className="ml-4 rounded-[var(--radius-sm)] bg-accent px-5 py-2 text-[13px] font-semibold text-bg-primary transition-all duration-200 hover:bg-accent-hover hover:shadow-glow-sm"
             >
-              Start een gesprek
+              Plan een kennismaking
             </Link>
           </div>
-
-          {/* Mobile Toggle */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] text-text-secondary transition-colors hover:bg-bg-subtle hover:text-text-primary lg:hidden"
-            aria-label={mobileOpen ? "Sluit menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
         </div>
       </div>
 
@@ -138,7 +142,7 @@ export function Navbar() {
                     href="/contact"
                     className="mt-3 block rounded-[var(--radius-sm)] bg-accent px-4 py-3.5 text-center text-base font-semibold text-bg-primary transition-colors hover:bg-accent-hover"
                   >
-                    Start een gesprek
+                    Plan een kennismaking
                   </Link>
                 </motion.div>
               </div>

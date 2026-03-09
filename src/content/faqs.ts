@@ -7,12 +7,17 @@ export const faqs = [
   {
     question: "Hoe lang duurt een gemiddeld project?",
     answer:
-      "Dit hangt af van de complexiteit. Een gerichte AI-integratie kan in 2-4 weken live staan. Een compleet platform of SaaS-product duurt doorgaans 2-4 maanden. Na een vrijblijvend gesprek geven wij een realistische inschatting.",
+      "Dit hangt af van de scope. Een gerichte AI-integratie of instaptraject kan in 1-2 weken live staan. Een eerste SaaS-versie of MVP is vaak al mogelijk binnen 4 weken. Complexere platformen leveren we doorgaans binnen 1-2 maanden op. Na een vrijblijvend gesprek geven wij altijd een realistische planning.",
+  },
+  {
+    question: "Wat kost een softwareproject bij Omido?",
+    answer:
+      "Instaptrajecten starten vanaf \u20AC995 — ideaal om snel te valideren of een specifiek probleem op te lossen. Volledige maatwerktrajecten worden op maat geoffreerd, afhankelijk van scope en complexiteit. We werken transparant en geven altijd vooraf een duidelijke offerte na een vrijblijvend technisch gesprek.",
   },
   {
     question: "Welke technologieën gebruiken jullie?",
     answer:
-      "Onze standaard stack bestaat uit React en Next.js voor de frontend, C# / .NET voor de backend, en Azure voor hosting en cloud-infrastructuur. Voor betalingen integreren we Stripe of Mollie, en voor AI-functionaliteit werken we met OpenAI en andere LLM-providers.",
+      "Onze kernstack bestaat uit Next.js, React, TypeScript en Tailwind CSS — aangevuld met AI-integraties (OpenAI, custom agents) en cloud-infrastructuur op maat. We kiezen tooling op basis van wat het beste past bij jouw project. Technologie is een middel — resultaat is het doel.",
   },
   {
     question: "Bieden jullie ook onderhoud na oplevering?",
@@ -20,8 +25,8 @@ export const faqs = [
       "Ja. Na de livegang bieden wij op maat gemaakte Service Level Agreements (SLA's) aan. Hiermee houden we je applicatie veilig, snel en up-to-date met actieve beveiligingsupdates, monitoring en prioriteit bij doorontwikkeling.",
   },
   {
-    question: "Wat kost een softwareproject bij Omido?",
+    question: "Hoe zit het met eigendom van de code?",
     answer:
-      "Trajecten starten vanaf \u20AC1.000. De uiteindelijke investering hangt af van de scope, complexiteit en gewenste functionaliteit. We werken transparant en geven altijd vooraf een duidelijke offerte na een vrijblijvend technisch gesprek.",
+      "Alle broncode is 100% van jou. Na oplevering ontvang je de volledige codebase en documentatie. Geen vendor lock-in, geen verborgen afhankelijkheden.",
   },
 ];

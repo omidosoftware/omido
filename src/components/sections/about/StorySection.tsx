@@ -12,45 +12,50 @@ export function StorySection() {
           <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
             Ons verhaal
           </p>
-          <h2 className="mb-8 text-2xl font-semibold tracking-tight text-text-primary">
-            Ontwerp, Bouw &amp; Oplevering in één hand
+          <h2 className="mb-8 font-[family-name:var(--font-display)] text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal leading-tight tracking-tight text-text-primary">
+            Waarom wij dit anders doen
           </h2>
         </FadeIn>
 
         <div className="space-y-5 text-[15px] leading-relaxed text-text-secondary">
           <FadeIn delay={0.1}>
             <p>
-              Veel IT-projecten lopen stuk op miscommunicatie. Je hebt een
-              designer die iets moois maakt, maar developers die zeggen dat het
-              niet gebouwd kan worden. Vervolgens snappen de developers de
-              business niet, en managers snappen de code niet.
+              Veel IT-projecten lopen stuk op miscommunicatie. Een designer
+              maakt iets moois, maar de developer zegt dat het niet kan.
+              Vervolgens snapt de developer de business niet, en de
+              ondernemer snapt de code niet.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.18}>
             <p>
               <strong className="text-text-primary">
-                Bij Omido Software lossen we dat op door het hele traject van A
-                tot Z over te nemen.
+                Bij Omido lossen we dat op door het hele traject in één hand
+                te houden.
               </strong>{" "}
-              Wij combineren een ijzersterke technische basis met strategisch
-              inzicht.
+              Strategie, ontwerp, development en oplevering — door hetzelfde
+              team, met dezelfde standaard. Geen overdrachten, geen
+              vertalingen, geen ruis.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.24}>
-            <blockquote className="my-10 border-l-2 border-accent pl-6 font-[family-name:var(--font-display)] text-xl italic leading-relaxed text-text-primary md:text-2xl">
-              &ldquo;Software die razendsnel live staat, feilloos werkt en
-              perfect aansluit op jouw zakelijke doelen.&rdquo;
-            </blockquote>
+            <div className="my-10 border-l-2 border-accent pl-6">
+              <p className="font-[family-name:var(--font-display)] text-xl leading-relaxed text-text-primary md:text-2xl">
+                Software bouwen die aansluit op jouw bedrijf, snel live
+                staat, en meegroeit met je ambities.
+              </p>
+              <p className="mt-3 text-sm text-text-tertiary">
+                — De kern van alles wat we doen
+              </p>
+            </div>
           </FadeIn>
 
           <FadeIn delay={0.3}>
             <p>
-              Wij begeleiden het creatieve ontwerpproces, schrijven de complexe
-              code en zorgen voor een vlekkeloze oplevering op veilige servers.
-              Het resultaat? Een product dat aansluit, presteert en groeit met
-              je bedrijf.
+              Wij begeleiden het creatieve ontwerp, schrijven de code en
+              zorgen voor een veilige oplevering. Het resultaat: een product
+              dat presteert, aansluit bij je doelen, en groeit met je bedrijf.
             </p>
           </FadeIn>
         </div>

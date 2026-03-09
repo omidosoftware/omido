@@ -12,7 +12,7 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <SectionWrapper elevated spacing="tight">
+    <SectionWrapper spacing="tight">
       <Container narrow>
         <FadeIn>
           <div className="mb-10 text-center">

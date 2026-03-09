@@ -4,6 +4,7 @@ import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { RingsBackground } from "@/components/backgrounds/RingsBackground";
 import { FadeIn } from "@/components/motion/FadeIn";
+import { COMPANY } from "@/lib/constants";
 
 export function CTASection() {
   return (
@@ -25,19 +26,30 @@ export function CTASection() {
           </FadeIn>
           <FadeIn delay={0.16}>
             <p className="mx-auto mt-5 max-w-md text-text-secondary">
-              Vertel ons over jouw project en ontvang binnen 24 uur een reactie
-              van ons team.
+              Vertel ons over jouw project en ontvang binnen 24 uur een
+              reactie van ons team. Vrijblijvend, altijd.
             </p>
           </FadeIn>
           <FadeIn delay={0.24}>
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button href="/contact" size="lg">
-                Start een gesprek
+                Plan een kennismaking
               </Button>
               <Button href="/diensten" variant="ghost" size="lg" arrow>
                 Bekijk onze diensten
               </Button>
             </div>
+          </FadeIn>
+          <FadeIn delay={0.32}>
+            <p className="mt-6 text-sm text-text-muted">
+              Of bel direct:{" "}
+              <a
+                href={`tel:${COMPANY.phone.replace(/\s/g, "")}`}
+                className="font-medium text-text-tertiary transition-colors hover:text-accent"
+              >
+                {COMPANY.phone}
+              </a>
+            </p>
           </FadeIn>
         </div>
       </Container>

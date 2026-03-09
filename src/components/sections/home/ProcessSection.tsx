@@ -1,38 +1,117 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef, useEffect, useState, useCallback } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { GridBackground } from "@/components/backgrounds/GridBackground";
 import { FadeIn } from "@/components/motion/FadeIn";
-import { StaggerChildren, staggerItemVariants } from "@/components/motion/StaggerChildren";
-import { Paintbrush, Code2, Rocket } from "lucide-react";
+import { Compass, Code2, Rocket } from "lucide-react";
 
 const steps = [
   {
     number: "01",
-    icon: Paintbrush,
-    title: "Ontwerp",
+    icon: Compass,
+    title: "Ontdek & Ontwerp",
+    timeline: "1–2 weken",
     description:
-      "We brengen jouw bedrijfslogica in kaart en ontwerpen een interface die klopt. Je ontvangt een klikbaar prototype voordat er één regel code wordt geschreven.",
+      "We brengen jouw bedrijfslogica in kaart en ontwerpen een interface die klopt. Je ontvangt een klikbaar prototype en een heldere offerte voordat er één regel code wordt geschreven.",
   },
   {
     number: "02",
     icon: Code2,
-    title: "Development",
+    title: "Bouw & Test",
+    timeline: "2–6 weken",
     description:
-      "Moderne, veilige code in React en C#. AI-versneld waar het waarde toevoegt. Geen shortcuts, geen technische schuld.",
+      "Gebouwd met Next.js, React, TypeScript en Tailwind — AI-versneld waar het waarde toevoegt. Een eerste SaaS-versie kan vaak al binnen 4 weken live staan. Geen shortcuts, geen technische schuld.",
   },
   {
     number: "03",
     icon: Rocket,
-    title: "Oplevering",
+    title: "Lanceer & Groei",
+    timeline: "Doorlopend",
     description:
-      "Hosting, betalingen, monitoring — wij configureren alles en leveren een productie-klaar platform op dat direct waarde levert.",
+      "Hosting, betalingen, monitoring — wij configureren alles en leveren een productie-klaar platform op. Doorontwikkeling en SLA op maat.",
   },
 ];
 
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isDesktop;
+}
+
+function useGsapTimeline(
+  containerRef: React.RefObject<HTMLDivElement | null>,
+  enabled: boolean
+) {
+  const [lineProgress, setLineProgress] = useState(0);
+
+  useEffect(() => {
+    if (!enabled || typeof window === "undefined") return;
+
+    let tween: gsap.core.Tween | null = null;
+
+    async function initGsap() {
+      try {
+        const gsapModule = await import("gsap");
+        const scrollTriggerModule = await import("gsap/ScrollTrigger");
+
+        gsapModule.gsap.registerPlugin(scrollTriggerModule.ScrollTrigger);
+
+        if (!containerRef.current) return;
+
+        const proxy = { progress: 0 };
+        tween = gsapModule.gsap.to(proxy, {
+          progress: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            end: "bottom 40%",
+            scrub: 0.8,
+          },
+          onUpdate: () => setLineProgress(proxy.progress),
+        });
+      } catch {
+        setLineProgress(1);
+      }
+    }
+
+    initGsap();
+
+    return () => {
+      if (tween) tween.kill();
+    };
+  }, [containerRef, enabled]);
+
+  return lineProgress;
+}
+
 export function ProcessSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const isDesktop = useIsDesktop();
+  const lineProgress = useGsapTimeline(containerRef, isDesktop);
+  const isInView = useInView(containerRef, { once: true, amount: 0.1 });
+
+  // Desktop: steps reveal tied to GSAP scroll progress
+  // Mobile: steps reveal tied to IntersectionObserver (isInView)
+  const getStepVisible = useCallback(
+    (index: number) => {
+      if (shouldReduceMotion) return true;
+      if (!isInView) return false;
+      if (isDesktop) return lineProgress > index * 0.3;
+      return true; // Mobile: all visible once section is in view
+    },
+    [shouldReduceMotion, isInView, isDesktop, lineProgress]
+  );
+
   return (
     <SectionWrapper elevated>
       <GridBackground />
@@ -40,32 +119,49 @@ export function ProcessSection() {
         <FadeIn>
           <div className="mb-14 text-center md:mb-18">
             <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
-              Werkwijze
+              Hoe wij bouwen
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight tracking-tight text-text-primary">
-              Ontwerp. Bouw. Lanceer.
+              Ontdek. Bouw. Lanceer.
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-text-secondary">
-              Van eerste gesprek tot livegang — een strak proces zonder verrassingen.
+              Van eerste gesprek tot livegang — een strak proces zonder
+              verrassingen.
             </p>
           </div>
         </FadeIn>
 
-        <StaggerChildren className="relative grid gap-6 lg:grid-cols-3 lg:gap-4">
-          {/* Connecting line (desktop) */}
+        <div ref={containerRef} className="relative grid gap-8 lg:grid-cols-3 lg:gap-4">
+          {/* Connecting line (desktop only, GSAP-driven) */}
           <div className="absolute top-[4.5rem] left-[20%] right-[20%] hidden h-px lg:block">
-            <FadeIn delay={0.4}>
-              <div className="h-px w-full bg-gradient-to-r from-transparent via-border-hover to-transparent" />
-            </FadeIn>
+            <div className="relative h-px w-full bg-border-subtle">
+              <motion.div
+                className="absolute inset-y-0 left-0 h-px origin-left bg-accent/40"
+                style={{
+                  scaleX: shouldReduceMotion ? 1 : lineProgress,
+                }}
+              />
+            </div>
           </div>
 
-          {steps.map((step) => {
+          {steps.map((step, i) => {
             const Icon = step.icon;
+            const isVisible = getStepVisible(i);
+
             return (
               <motion.div
                 key={step.number}
-                variants={staggerItemVariants}
                 className="group relative"
+                initial={shouldReduceMotion ? undefined : { opacity: 0, y: 24 }}
+                animate={
+                  isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }
+                }
+                transition={{
+                  duration: 0.55,
+                  // On mobile: stagger with Framer delays. On desktop: GSAP drives timing, no extra delay.
+                  delay: isDesktop ? 0 : i * 0.15,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
               >
                 <div className="flex flex-col items-center text-center">
                   {/* Number + Icon */}
@@ -78,17 +174,28 @@ export function ProcessSection() {
                     </span>
                   </div>
 
-                  <h3 className="mb-3 text-lg font-semibold text-text-primary">
+                  <h3 className="mb-1.5 text-lg font-semibold text-text-primary">
                     {step.title}
                   </h3>
-                  <p className="mx-auto max-w-[280px] text-sm leading-relaxed text-text-secondary">
+                  <p className="mb-3 text-[12px] font-medium text-accent">
+                    {step.timeline}
+                  </p>
+                  <p className="mx-auto max-w-[300px] text-sm leading-relaxed text-text-secondary">
                     {step.description}
                   </p>
                 </div>
               </motion.div>
             );
           })}
-        </StaggerChildren>
+        </div>
+
+        {/* Qualifier */}
+        <FadeIn delay={0.3}>
+          <p className="mt-10 text-center text-[13px] text-text-muted md:mt-14">
+            Doorlooptijd hangt af van scope en complexiteit. We geven altijd
+            vooraf een realistische planning.
+          </p>
+        </FadeIn>
       </Container>
     </SectionWrapper>
   );
