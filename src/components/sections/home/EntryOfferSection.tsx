@@ -22,14 +22,14 @@ const growthFeatures = [
 
 export function EntryOfferSection() {
   return (
-    <SectionWrapper elevated>
+    <SectionWrapper elevated spacing="generous">
       <Container>
         <FadeIn>
           <div className="mb-12 max-w-xl text-center mx-auto md:mb-14">
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
+            <p className="mb-2 md:mb-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
               Trajecten
             </p>
-            <h2 className="font-[family-name:var(--font-display)] text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight tracking-tight text-text-primary">
+            <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.875rem,4vw,3.25rem)] font-normal leading-tight tracking-tight text-text-primary">
               Begin klein.{" "}
               <span className="text-accent">Groei verder.</span>
             </h2>
@@ -42,8 +42,8 @@ export function EntryOfferSection() {
 
         <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
           {/* Entry trajectory */}
-          <FadeIn delay={0.1}>
-            <div className="flex h-full flex-col rounded-[var(--radius-lg)] border border-border-default bg-bg-primary p-7 transition-all duration-300 hover:border-border-hover md:p-8">
+          <FadeIn delay={0.1} variant="scaleSettle">
+            <div className="flex h-full flex-col rounded-[var(--radius-lg)] border-t-2 border-accent/15 bg-bg-primary p-7 transition-all duration-300 hover:border-border-hover md:border md:border-border-default md:p-8">
               <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-bg-muted">
                 <Zap className="h-5 w-5 text-text-tertiary" />
               </div>
@@ -76,7 +76,7 @@ export function EntryOfferSection() {
           </FadeIn>
 
           {/* Growth trajectory */}
-          <FadeIn delay={0.15}>
+          <FadeIn delay={0.15} variant="scaleSettle">
             <div className="flex h-full flex-col rounded-[var(--radius-lg)] border border-accent/20 bg-accent-subtle p-7 transition-all duration-300 hover:border-accent/30 hover:shadow-glow-sm md:p-8">
               <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-accent-muted">
                 <Layers className="h-5 w-5 text-accent" />

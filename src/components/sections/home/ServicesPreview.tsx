@@ -23,10 +23,10 @@ export function ServicesPreview() {
         <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between">
           <FadeIn>
             <div className="max-w-lg">
-              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
+              <p className="mb-2 md:mb-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
                 Expertise
               </p>
-              <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold tracking-tight text-text-primary">
+              <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.625rem,3.5vw,2.5rem)] font-normal tracking-tight text-text-primary">
                 Wat we bouwen
               </h2>
               <p className="mt-3 text-text-secondary">
@@ -52,15 +52,15 @@ export function ServicesPreview() {
               <motion.div key={service.id} variants={staggerItemVariants}>
                 <Link
                   href="/diensten"
-                  className={`group relative flex gap-5 rounded-[var(--radius-lg)] border p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md md:p-7 ${
+                  className={`group relative flex gap-5 rounded-[var(--radius-lg)] border p-6 transition-all duration-300 md:hover:-translate-y-0.5 md:hover:shadow-md md:p-7 ${
                     service.highlighted
-                      ? "border-accent/20 bg-accent-subtle hover:border-accent/30 hover:shadow-glow-sm"
+                      ? "border-accent/20 bg-accent-subtle hover:border-accent/30 md:hover:shadow-glow-sm"
                       : "border-border-default bg-bg-subtle hover:border-border-hover"
                   }`}
                 >
                   {/* Icon */}
                   <div
-                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] ${
+                    className={`hidden md:flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] ${
                       service.highlighted
                         ? "bg-accent-muted text-accent"
                         : "bg-bg-muted text-text-tertiary group-hover:text-accent"

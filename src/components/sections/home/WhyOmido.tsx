@@ -32,10 +32,10 @@ export function WhyOmido() {
       <Container>
         <FadeIn>
           <div className="mb-12 max-w-xl md:mb-16">
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
-              Waarom Omido
+            <p className="mb-2 md:mb-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
+              Waarom OMIDO
             </p>
-            <h2 className="font-[family-name:var(--font-display)] text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight tracking-tight text-text-primary">
+            <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.875rem,4vw,3.25rem)] font-normal leading-tight tracking-tight text-text-primary">
               Wat ons anders maakt
             </h2>
           </div>
@@ -46,7 +46,7 @@ export function WhyOmido() {
           {differentiators.map((item, i) => {
             const Icon = item.icon;
             return (
-              <FadeIn key={item.title} delay={i * 0.1}>
+              <FadeIn key={item.title} delay={i * 0.08} variant="fadeUp">
                 <div className="grid gap-4 py-8 first:pt-0 last:pb-0 md:grid-cols-[auto_1fr] md:gap-10 lg:grid-cols-[4rem_16rem_1fr]">
                   {/* Number + Icon */}
                   <div className="flex items-start gap-3 md:flex-col md:items-center md:gap-1.5">

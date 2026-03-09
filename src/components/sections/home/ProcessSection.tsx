@@ -113,15 +113,15 @@ export function ProcessSection() {
   );
 
   return (
-    <SectionWrapper elevated>
+    <SectionWrapper elevated spacing="generous">
       <GridBackground />
       <Container className="relative z-10">
         <FadeIn>
           <div className="mb-14 text-center md:mb-18">
-            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
+            <p className="mb-2 md:mb-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
               Hoe wij bouwen
             </p>
-            <h2 className="font-[family-name:var(--font-display)] text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight tracking-tight text-text-primary">
+            <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.625rem,3.5vw,2.5rem)] font-normal leading-tight tracking-tight text-text-primary">
               Ontdek. Bouw. Lanceer.
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-text-secondary">
@@ -159,17 +159,22 @@ export function ProcessSection() {
                 transition={{
                   duration: 0.55,
                   // On mobile: stagger with Framer delays. On desktop: GSAP drives timing, no extra delay.
-                  delay: isDesktop ? 0 : i * 0.15,
-                  ease: [0.16, 1, 0.3, 1],
+                  delay: isDesktop ? 0 : i * 0.12,
+                  ease: [0.25, 0.46, 0.45, 0.94],
                 }}
               >
-                <div className="flex flex-col items-center text-center">
+                <div className="flex flex-col items-start text-left lg:items-center lg:text-center">
                   {/* Number + Icon */}
-                  <div className="relative mb-6">
-                    <div className="flex h-18 w-18 items-center justify-center rounded-2xl border border-border-default bg-bg-primary transition-all duration-300 group-hover:border-border-hover group-hover:shadow-glow-sm">
+                  <div className="relative mb-4 lg:mb-6">
+                    {/* Large step number -- mobile only */}
+                    <span className="text-3xl font-bold text-accent/20 lg:hidden">
+                      {step.number}
+                    </span>
+                    {/* Icon container -- desktop only */}
+                    <div className="hidden lg:flex h-18 w-18 items-center justify-center rounded-2xl border border-border-default bg-bg-primary transition-all duration-300 group-hover:border-border-hover group-hover:shadow-glow-sm">
                       <Icon className="h-7 w-7 text-accent" />
                     </div>
-                    <span className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-bg-muted text-[11px] font-bold text-text-muted ring-2 ring-bg-elevated">
+                    <span className="absolute -right-2 -top-2 hidden lg:flex h-7 w-7 items-center justify-center rounded-full bg-bg-muted text-[11px] font-bold text-text-muted ring-2 ring-bg-elevated">
                       {step.number}
                     </span>
                   </div>
@@ -180,7 +185,7 @@ export function ProcessSection() {
                   <p className="mb-3 text-[12px] font-medium text-accent">
                     {step.timeline}
                   </p>
-                  <p className="mx-auto max-w-[300px] text-sm leading-relaxed text-text-secondary">
+                  <p className="text-sm leading-relaxed text-text-secondary lg:mx-auto lg:max-w-[300px]">
                     {step.description}
                   </p>
                 </div>

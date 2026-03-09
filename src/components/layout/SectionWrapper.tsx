@@ -5,13 +5,15 @@ interface SectionWrapperProps {
   id?: string;
   elevated?: boolean;
   className?: string;
-  spacing?: "default" | "tight" | "loose";
+  spacing?: "compact" | "snug" | "default" | "generous" | "statement";
 }
 
 const spacingClasses = {
-  tight: "py-12 md:py-16 lg:py-20",
-  default: "py-16 md:py-22 lg:py-26",
-  loose: "py-20 md:py-26 lg:py-34",
+  compact: "py-8 md:py-12 lg:py-16",
+  snug: "py-12 md:py-16 lg:py-20",
+  default: "py-14 md:py-22 lg:py-26",
+  generous: "py-18 md:py-26 lg:py-30",
+  statement: "py-22 md:py-30 lg:py-34",
 };
 
 export function SectionWrapper({

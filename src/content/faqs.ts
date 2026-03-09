@@ -10,7 +10,7 @@ export const faqs = [
       "Dit hangt af van de scope. Een gerichte AI-integratie of instaptraject kan in 1-2 weken live staan. Een eerste SaaS-versie of MVP is vaak al mogelijk binnen 4 weken. Complexere platformen leveren we doorgaans binnen 1-2 maanden op. Na een vrijblijvend gesprek geven wij altijd een realistische planning.",
   },
   {
-    question: "Wat kost een softwareproject bij Omido?",
+    question: "Wat kost een softwareproject bij OMIDO?",
     answer:
       "Instaptrajecten starten vanaf \u20AC995 — ideaal om snel te valideren of een specifiek probleem op te lossen. Volledige maatwerktrajecten worden op maat geoffreerd, afhankelijk van scope en complexiteit. We werken transparant en geven altijd vooraf een duidelijke offerte na een vrijblijvend technisch gesprek.",
   },

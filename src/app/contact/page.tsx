@@ -11,7 +11,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Neem contact op met Omido Software. Vraag een offerte aan of plan een introductiegesprek voor jouw softwareproject.",
+    "Neem contact op met OMIDO Software. Vraag een offerte aan of plan een introductiegesprek voor jouw softwareproject.",
 };
 
 export default function ContactPage() {
@@ -29,18 +29,18 @@ export default function ContactPage() {
 
       <PageHeader
         title="Laten we"
-        highlight="praten."
+        highlight="kennis maken."
         subtitle="Heb je een vraag, wil je een offerte of gewoon brainstormen? Je hoort binnen 24 uur van ons."
       />
       <SectionWrapper>
         <Container>
           <div className="grid gap-8 lg:grid-cols-3">
-            <div className="space-y-6 lg:col-span-1">
+            <div className="order-2 space-y-6 lg:order-none lg:col-span-1">
               <ContactInfo />
               <QuickCallCard />
               <WhatHappensNext />
             </div>
-            <div className="lg:col-span-2">
+            <div className="order-1 lg:order-none lg:col-span-2">
               <ContactForm />
             </div>
           </div>

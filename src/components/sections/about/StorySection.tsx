@@ -30,7 +30,7 @@ export function StorySection() {
           <FadeIn delay={0.18}>
             <p>
               <strong className="text-text-primary">
-                Bij Omido lossen we dat op door het hele traject in één hand
+                Bij OMIDO lossen we dat op door het hele traject in één hand
                 te houden.
               </strong>{" "}
               Strategie, ontwerp, development en oplevering — door hetzelfde

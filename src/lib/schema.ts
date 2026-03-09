@@ -8,7 +8,7 @@ export function organizationSchema() {
     url: COMPANY.url,
     logo: `${COMPANY.url}/logo.png`,
     description:
-      "Omido Software is een premium softwarestudio gespecialiseerd in maatwerksoftware, AI-integraties en schaalbare platformen.",
+      "OMIDO Software is een premium softwarestudio gespecialiseerd in maatwerksoftware, AI-integraties en schaalbare platformen.",
     address: {
       "@type": "PostalAddress",
       addressRegion: "Zuid-Holland",

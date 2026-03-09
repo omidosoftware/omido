@@ -1,8 +1,11 @@
 import { Phone } from "lucide-react";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { COMPANY } from "@/lib/constants";
+import { isValidPhone } from "@/lib/utils";
 
 export function QuickCallCard() {
+  if (!isValidPhone(COMPANY.phone)) return null;
+
   return (
     <FadeIn delay={0.15}>
       <div className="rounded-[var(--radius-lg)] border border-accent/15 bg-accent-muted p-7 shadow-glow-sm">

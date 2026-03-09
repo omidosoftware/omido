@@ -11,7 +11,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Portfolio",
   description:
-    "Bekijk hoe Omido Software echte producten bouwt. Van concept tot live platform — case studies van ons werk.",
+    "Bekijk hoe OMIDO Software echte producten bouwt. Van concept tot live platform — case studies van ons werk.",
 };
 
 export default function PortfolioPage() {

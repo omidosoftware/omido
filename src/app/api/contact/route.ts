@@ -18,7 +18,7 @@ import { NextResponse } from "next/server";
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const CONTACT_EMAIL_TO = process.env.CONTACT_EMAIL_TO || "info@omido.nl";
 const CONTACT_EMAIL_FROM =
-  process.env.CONTACT_EMAIL_FROM || "Omido Website <onboarding@resend.dev>";
+  process.env.CONTACT_EMAIL_FROM || "OMIDO Website <onboarding@resend.dev>";
 
 interface ContactPayload {
   name: string;

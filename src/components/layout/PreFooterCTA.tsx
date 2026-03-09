@@ -12,7 +12,7 @@ export function PreFooterCTA({
   subtitle = "Vertel ons over jouw idee en ontvang binnen 24 uur een reactie. Vrijblijvend, altijd.",
 }: PreFooterCTAProps) {
   return (
-    <section className="border-t border-border-subtle bg-bg-elevated py-16 md:py-20">
+    <section data-hide-sticky-cta className="border-t border-border-subtle bg-bg-elevated py-16 md:py-20">
       <Container>
         <FadeIn>
           <div className="flex flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">

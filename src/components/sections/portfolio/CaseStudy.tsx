@@ -14,7 +14,7 @@ export function CaseStudy({ study }: { study: CaseStudyType }) {
         <div className="overflow-hidden rounded-[var(--radius-lg)] border border-border-default bg-bg-subtle">
           <div className="grid lg:grid-cols-2">
             {/* Left: project identity */}
-            <div className="flex flex-col justify-center border-b border-border-subtle p-8 lg:border-b-0 lg:border-r lg:p-12">
+            <div className="flex flex-col justify-center border-b border-border-subtle p-6 md:p-8 lg:border-b-0 lg:border-r lg:p-12">
               <div className="mb-4 flex flex-wrap gap-2">
                 {study.tags.map((tag) => (
                   <Badge key={tag}>{tag}</Badge>
@@ -26,7 +26,7 @@ export function CaseStudy({ study }: { study: CaseStudyType }) {
               <p className="mt-1 text-text-tertiary">{study.subtitle}</p>
 
               {/* Project meta */}
-              <div className="mt-6 grid grid-cols-3 gap-4 rounded-[var(--radius-md)] border border-border-subtle bg-bg-primary px-5 py-4">
+              <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 rounded-[var(--radius-md)] border border-border-subtle bg-bg-primary px-5 py-4">
                 {study.projectMeta.map((meta) => (
                   <div key={meta.label}>
                     <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-text-muted">
@@ -53,7 +53,7 @@ export function CaseStudy({ study }: { study: CaseStudyType }) {
             </div>
 
             {/* Right: deliverables */}
-            <div className="flex flex-col justify-center p-8 lg:p-12">
+            <div className="flex flex-col justify-center p-6 md:p-8 lg:p-12">
               <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
                 Opgeleverd
               </p>

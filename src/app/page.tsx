@@ -1,6 +1,7 @@
 import { HeroSection } from "@/components/sections/home/HeroSection";
 import { TrustMetrics } from "@/components/sections/home/TrustMetrics";
 import { WhyOmido } from "@/components/sections/home/WhyOmido";
+import { SectionDivider } from "@/components/layout/SectionDivider";
 import { ServicesPreview } from "@/components/sections/home/ServicesPreview";
 import { ProcessSection } from "@/components/sections/home/ProcessSection";
 import { ResultsSection } from "@/components/sections/home/ResultsSection";
@@ -22,9 +23,11 @@ export default function HomePage() {
       <HeroSection />
       <TrustMetrics />
       <WhyOmido />
+      <SectionDivider />
       <ServicesPreview />
       <ProcessSection />
       <ResultsSection />
+      <SectionDivider />
       <EntryOfferSection />
       <FAQSection />
       <CTASection />

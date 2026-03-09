@@ -5,8 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { NAV_ITEMS } from "@/lib/constants";
+import { NAV_ITEMS, COMPANY } from "@/lib/constants";
+import { isValidPhone } from "@/lib/utils";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -28,12 +28,61 @@ export function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  // Escape key to close mobile nav
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [mobileOpen]);
+
+  // Focus trap for mobile nav overlay
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const overlay = document.querySelector('[role="dialog"]') as HTMLElement;
+    if (!overlay) return;
+
+    const focusableElements = overlay.querySelectorAll<HTMLElement>(
+      'a[href], button, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+
+    firstFocusable?.focus();
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstFocusable) {
+          e.preventDefault();
+          lastFocusable?.focus();
+        }
+      } else {
+        if (document.activeElement === lastFocusable) {
+          e.preventDefault();
+          firstFocusable?.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleTab);
+    return () => document.removeEventListener("keydown", handleTab);
+  }, [mobileOpen]);
+
+  const showPhone = isValidPhone(COMPANY.phone);
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled || mobileOpen
-          ? "bg-bg-elevated/90 backdrop-blur-md border-b border-border-subtle shadow-sm"
-          : "bg-transparent"
+        mobileOpen
+          ? "bg-[#0A0A0B]"
+          : scrolled
+            ? "bg-bg-elevated/90 backdrop-blur-md border-b border-border-subtle shadow-sm"
+            : "bg-transparent"
       }`}
       role="navigation"
       aria-label="Hoofdnavigatie"
@@ -48,11 +97,11 @@ export function Navbar() {
           <Link
             href="/"
             className="justify-self-center lg:justify-self-auto relative shrink-0"
-            aria-label="Omido Software — Terug naar home"
+            aria-label="OMIDO Software — Terug naar home"
           >
             <Image
               src="/logo.png"
-              alt="Omido Software"
+              alt="OMIDO Software"
               width={110}
               height={36}
               className="h-8 w-auto lg:h-9"
@@ -67,7 +116,22 @@ export function Navbar() {
             aria-label={mobileOpen ? "Sluit menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            <div className="relative h-5 w-5">
+              <span
+                className={`absolute left-0 h-[1.5px] w-5 bg-current transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${
+                  mobileOpen
+                    ? 'top-[9.5px] rotate-45'
+                    : 'top-[5px] rotate-0'
+                }`}
+              />
+              <span
+                className={`absolute left-0 h-[1.5px] w-5 bg-current transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${
+                  mobileOpen
+                    ? 'top-[9.5px] -rotate-45'
+                    : 'top-[13px] rotate-0'
+                }`}
+              />
+            </div>
           </button>
 
           {/* Desktop Nav */}
@@ -102,51 +166,69 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Full-Screen Overlay */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden border-t border-border-subtle bg-bg-elevated lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed inset-0 z-50 flex flex-col bg-[#0A0A0B] px-6 pt-24 lg:hidden"
+            style={{ paddingBottom: "max(2rem, env(safe-area-inset-bottom, 2rem))" }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobiel navigatiemenu"
           >
-            <div className="mx-auto max-w-[1200px] px-6 py-4">
-              <div className="flex flex-col gap-1">
-                {NAV_ITEMS.map((item, i) => (
-                  <motion.div
-                    key={item.href}
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <Link
-                      href={item.href}
-                      className={`block rounded-[var(--radius-sm)] px-4 py-3.5 text-base font-medium transition-colors ${
-                        pathname === item.href
-                          ? "bg-bg-subtle text-accent"
-                          : "text-text-secondary hover:bg-bg-subtle hover:text-text-primary"
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  </motion.div>
-                ))}
+            <div className="flex flex-col space-y-1">
+              {NAV_ITEMS.map((item, i) => (
                 <motion.div
-                  initial={{ opacity: 0, x: -12 }}
+                  key={item.href}
+                  initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: NAV_ITEMS.length * 0.05, duration: 0.3 }}
+                  transition={{
+                    delay: 0.1 + i * 0.05,
+                    duration: 0.35,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
                 >
                   <Link
-                    href="/contact"
-                    className="mt-3 block rounded-[var(--radius-sm)] bg-accent px-4 py-3.5 text-center text-base font-semibold text-bg-primary transition-colors hover:bg-accent-hover"
+                    href={item.href}
+                    className={`block font-[family-name:var(--font-instrument-serif)] text-[2rem] font-normal transition-colors ${
+                      pathname === item.href
+                        ? "text-text-primary"
+                        : "text-text-secondary"
+                    }`}
                   >
-                    Plan een kennismaking
+                    {item.label}
+                    {pathname === item.href && (
+                      <span className="block w-6 h-px bg-accent mt-1" />
+                    )}
                   </Link>
                 </motion.div>
-              </div>
+              ))}
             </div>
+
+            {showPhone && (
+              <div className="mt-auto">
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: 0.35,
+                    duration: 0.35,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
+                >
+                  <a
+                    href={`tel:${COMPANY.phone.replace(/\s/g, "")}`}
+                    className="block text-center text-sm text-text-muted"
+                  >
+                    {COMPANY.phone}
+                  </a>
+                </motion.div>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

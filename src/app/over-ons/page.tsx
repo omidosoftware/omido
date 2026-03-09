@@ -9,7 +9,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Over Ons",
   description:
-    "Omido Software combineert technische excellentie met strategisch inzicht. Maak kennis met het team achter de code.",
+    "OMIDO Software combineert technische excellentie met strategisch inzicht. Maak kennis met het team achter de code.",
 };
 
 export default function OverOnsPage() {
@@ -27,7 +27,7 @@ export default function OverOnsPage() {
 
       <PageHeader
         title="Wij zijn"
-        highlight="Omido."
+        highlight="OMIDO."
         subtitle="Een modern tech-bureau dat snapt dat software een middel is — geen doel op zich."
       />
       <StorySection />

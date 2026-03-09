@@ -1,5 +1,5 @@
 export const COMPANY = {
-  name: "Omido Software",
+  name: "OMIDO Software",
   tagline: "End-to-end software development",
   email: "info@omido.nl",
   phone: "+31 (0)6 1234 5678",

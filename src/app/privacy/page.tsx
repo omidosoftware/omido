@@ -6,7 +6,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Lees hoe Omido Software omgaat met jouw persoonsgegevens en privacy.",
+    "Lees hoe OMIDO Software omgaat met jouw persoonsgegevens en privacy.",
 };
 
 export default function PrivacyPage() {

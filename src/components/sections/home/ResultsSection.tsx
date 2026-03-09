@@ -25,25 +25,25 @@ const projectMeta = [
 
 export function ResultsSection() {
   return (
-    <SectionWrapper>
+    <SectionWrapper spacing="generous">
       <Container>
         <FadeIn>
           <div className="mb-12 text-center md:mb-16">
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
+            <p className="mb-2 md:mb-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
               Resultaten
             </p>
-            <h2 className="font-[family-name:var(--font-display)] text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight tracking-tight text-text-primary">
+            <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.625rem,3.5vw,2.5rem)] font-normal leading-tight tracking-tight text-text-primary">
               Wat we opleveren
             </h2>
           </div>
         </FadeIn>
 
         {/* Featured case study */}
-        <FadeIn delay={0.1}>
+        <FadeIn delay={0.1} variant="scaleSettle">
           <div className="overflow-hidden rounded-[var(--radius-lg)] border border-border-default bg-bg-subtle">
             <div className="grid lg:grid-cols-2">
               {/* Left: structured project summary */}
-              <div className="flex flex-col justify-center border-b border-border-subtle p-8 lg:border-b-0 lg:border-r lg:p-12">
+              <div className="flex flex-col justify-center border-b border-border-subtle p-6 md:p-8 lg:border-b-0 lg:border-r lg:p-12">
                 <div className="mb-6">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
                     Case study
@@ -57,7 +57,7 @@ export function ResultsSection() {
                 </div>
 
                 {/* Project meta grid */}
-                <div className="grid grid-cols-3 gap-4 rounded-[var(--radius-md)] border border-border-subtle bg-bg-primary px-5 py-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 rounded-[var(--radius-md)] border border-border-subtle bg-bg-primary px-5 py-4">
                   {projectMeta.map((meta) => (
                     <div key={meta.label}>
                       <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-text-muted">
@@ -91,7 +91,7 @@ export function ResultsSection() {
               </div>
 
               {/* Right: what was delivered */}
-              <div className="flex flex-col justify-center p-8 lg:p-12">
+              <div className="flex flex-col justify-center p-6 md:p-8 lg:p-12">
                 <div className="mb-3 flex flex-wrap gap-2">
                   <span className="rounded-full bg-accent-muted px-3 py-1 text-[11px] font-semibold text-accent">
                     Marketplace
@@ -125,7 +125,7 @@ export function ResultsSection() {
         </FadeIn>
 
         {/* Guarantees strip */}
-        <FadeIn delay={0.2}>
+        <FadeIn delay={0.2} variant="softEnter">
           <div className="mt-8 flex flex-col items-center justify-center gap-6 rounded-[var(--radius-md)] border border-border-subtle bg-bg-subtle px-6 py-5 sm:flex-row sm:gap-8 md:mt-10">
             {guarantees.map((g) => {
               const Icon = g.icon;

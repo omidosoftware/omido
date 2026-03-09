@@ -11,7 +11,7 @@ import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Diensten",
   description:
-    "AI-agents, maatwerk web applicaties, SaaS-platformen en API-integraties. Bekijk wat Omido Software voor jouw bedrijf kan bouwen.",
+    "AI-agents, maatwerk web applicaties, SaaS-platformen en API-integraties. Bekijk wat OMIDO Software voor jouw bedrijf kan bouwen.",
 };
 
 export default function DienstenPage() {

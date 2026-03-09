@@ -100,7 +100,7 @@ export function ContactForm() {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} data-hide-sticky-cta className="space-y-5">
                 <div className="grid gap-5 md:grid-cols-2">
                   <div>
                     <label

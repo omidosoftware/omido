@@ -21,11 +21,11 @@ const containerVariants = {
 };
 
 export const staggerItemVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
 };
 
@@ -34,14 +34,14 @@ export const staggerItemFromLeft = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
 };
 
 export function StaggerChildren({
   children,
   className,
-  staggerDelay = 0.08,
+  staggerDelay = 0.06,
   once = true,
   amount = 0.1,
 }: StaggerChildrenProps) {

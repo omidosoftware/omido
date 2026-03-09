@@ -33,7 +33,7 @@ export function TrustMetrics() {
                   transition={{
                     duration: 0.5,
                     delay: i * 0.1,
-                    ease: [0.16, 1, 0.3, 1],
+                    ease: [0.25, 0.46, 0.45, 0.94],
                   }}
                 >
                   <div className="mb-2.5 flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-accent-muted">

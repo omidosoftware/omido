@@ -25,7 +25,7 @@ export function PageHeader({ badge, title, highlight, subtitle }: PageHeaderProp
     };
 
   return (
-    <div className="relative pt-34 pb-16 md:pt-38 md:pb-20 lg:pb-22">
+    <div className="relative pt-24 pb-10 md:pt-34 md:pb-16 lg:pb-22">
       <Container narrow>
         <div className="text-center">
           {badge && (
@@ -35,7 +35,7 @@ export function PageHeader({ badge, title, highlight, subtitle }: PageHeaderProp
           )}
 
           <Wrapper {...getProps(badge ? 0.08 : 0)}>
-            <div className="mx-auto mb-6 h-px w-12 bg-accent opacity-60" />
+            <div className="mx-auto mb-4 h-px w-12 bg-accent opacity-60 md:mb-6" />
           </Wrapper>
 
           <Wrapper {...getProps(badge ? 0.12 : 0.06)}>
@@ -52,7 +52,7 @@ export function PageHeader({ badge, title, highlight, subtitle }: PageHeaderProp
 
           {subtitle && (
             <Wrapper {...getProps(badge ? 0.2 : 0.14)}>
-              <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-text-secondary">
+              <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-text-secondary md:mt-5 md:text-lg">
                 {subtitle}
               </p>
             </Wrapper>

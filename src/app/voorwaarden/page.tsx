@@ -6,7 +6,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Algemene Voorwaarden",
   description:
-    "De algemene voorwaarden van Omido Software voor onze dienstverlening.",
+    "De algemene voorwaarden van OMIDO Software voor onze dienstverlening.",
 };
 
 export default function VoorwaardenPage() {

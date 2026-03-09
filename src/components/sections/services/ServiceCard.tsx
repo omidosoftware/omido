@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { BrainCircuit, Monitor, Server, Cable, Check, Users } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { Service } from "@/content/services";
@@ -16,15 +13,13 @@ export function ServiceCard({ service }: { service: Service }) {
   const Icon = iconMap[service.icon];
 
   return (
-    <motion.article
-      className={`group flex flex-col rounded-[var(--radius-lg)] border bg-bg-subtle transition-all duration-300 hover:shadow-md ${
+    <article
+      className={`group flex flex-col rounded-[var(--radius-lg)] border bg-bg-subtle transition-all duration-300 md:hover:-translate-y-[3px] md:hover:shadow-md ${
         service.highlighted
           ? "border-accent/20 shadow-glow-sm hover:border-accent/30"
           : "border-border-default hover:border-border-hover"
       }`}
       id={service.id}
-      whileHover={{ y: -3 }}
-      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
     >
       {/* Accent top bar for highlighted */}
       {service.highlighted && (
@@ -91,6 +86,6 @@ export function ServiceCard({ service }: { service: Service }) {
           {service.cta.label}
         </Button>
       </div>
-    </motion.article>
+    </article>
   );
 }
