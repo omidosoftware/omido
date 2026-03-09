@@ -5,8 +5,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { Home, Users, Briefcase, Code2, Mail, X } from "lucide-react";
 import { NAV_ITEMS, COMPANY } from "@/lib/constants";
 import { isValidPhone } from "@/lib/utils";
+
+const NAV_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  "/": Home,
+  "/over-ons": Users,
+  "/portfolio": Briefcase,
+  "/diensten": Code2,
+  "/contact": Mail,
+};
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -174,55 +183,94 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-0 z-50 flex flex-col bg-[#0A0A0B] px-6 pt-24 lg:hidden"
+            className="fixed inset-0 z-50 flex flex-col bg-[#0A0A0B] lg:hidden"
             style={{ paddingBottom: "max(2rem, env(safe-area-inset-bottom, 2rem))" }}
             role="dialog"
             aria-modal="true"
             aria-label="Mobiel navigatiemenu"
           >
-            <div className="flex flex-col space-y-1">
-              {NAV_ITEMS.map((item, i) => (
-                <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay: 0.1 + i * 0.05,
-                    duration: 0.35,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                  }}
-                >
-                  <Link
-                    href={item.href}
-                    className={`block font-[family-name:var(--font-instrument-serif)] text-[2rem] font-normal transition-colors ${
-                      pathname === item.href
-                        ? "text-text-primary"
-                        : "text-text-secondary"
-                    }`}
-                  >
-                    {item.label}
-                    {pathname === item.href && (
-                      <span className="block w-6 h-px bg-accent mt-1" />
-                    )}
-                  </Link>
-                </motion.div>
-              ))}
+            {/* Close button — top right */}
+            <div className="flex justify-end px-6 pt-5">
+              <motion.button
+                initial={{ opacity: 0, rotate: -90 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                transition={{ delay: 0.15, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+                onClick={() => setMobileOpen(false)}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-text-secondary transition-colors hover:bg-white/5 hover:text-text-primary"
+                aria-label="Sluit menu"
+              >
+                <X className="h-5 w-5" />
+              </motion.button>
             </div>
 
+            {/* Nav items — centered */}
+            <div className="flex flex-1 flex-col items-center justify-center -mt-6">
+              <div className="flex flex-col items-center space-y-5">
+                {NAV_ITEMS.map((item, i) => {
+                  const Icon = NAV_ICONS[item.href];
+                  const isActive = pathname === item.href;
+                  return (
+                    <motion.div
+                      key={item.href}
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        delay: 0.12 + i * 0.06,
+                        duration: 0.4,
+                        ease: [0.25, 0.46, 0.45, 0.94],
+                      }}
+                    >
+                      <Link
+                        href={item.href}
+                        className={`group flex items-center gap-3 transition-colors duration-200 ${
+                          isActive
+                            ? "text-text-primary"
+                            : "text-text-tertiary"
+                        }`}
+                      >
+                        {Icon && (
+                          <span className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors duration-200 ${
+                            isActive
+                              ? "bg-accent/12 text-accent"
+                              : "bg-white/[0.04] text-text-muted group-hover:bg-white/[0.07] group-hover:text-text-secondary"
+                          }`}>
+                            <Icon className="h-[18px] w-[18px]" />
+                          </span>
+                        )}
+                        <span className={`font-[family-name:var(--font-instrument-serif)] text-[1.75rem] font-normal leading-none tracking-tight ${
+                          isActive ? "" : "group-hover:text-text-secondary"
+                        }`}>
+                          {item.label}
+                        </span>
+                        {isActive && (
+                          <motion.span
+                            layoutId="mobile-nav-dot"
+                            className="ml-1 h-1.5 w-1.5 rounded-full bg-accent"
+                            transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                          />
+                        )}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Bottom — phone */}
             {showPhone && (
-              <div className="mt-auto">
+              <div className="px-6 pb-2">
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
-                    delay: 0.35,
+                    delay: 0.4,
                     duration: 0.35,
                     ease: [0.25, 0.46, 0.45, 0.94],
                   }}
                 >
                   <a
                     href={`tel:${COMPANY.phone.replace(/\s/g, "")}`}
-                    className="block text-center text-sm text-text-muted"
+                    className="block text-center text-sm tracking-wide text-text-muted/60"
                   >
                     {COMPANY.phone}
                   </a>
